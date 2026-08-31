@@ -4,7 +4,7 @@ import os
 # הגדרת עמוד RTL
 st.set_page_config(page_title="מחשבון אירועים - EM Group", page_icon="🎵", layout="centered")
 
-# עיצוב CSS ממוקד: יישור לימין (RTL) ומסגרות סגולות קבועות
+# עיצוב CSS ממוקד: יישור לימין (RTL) ומסגרת סגולה יחידה למעטפת בלבד
 st.markdown("""
     <style>
     /* כיוון טקסט ויישור לימין לכל האלמנטים */
@@ -23,20 +23,26 @@ st.markdown("""
         direction: rtl !important;
     }
 
-    /* מסגרת סגולה קבועה לכל תיבות הבחירה ושדות המספרים */
-    div[data-baseweb="select"] > div,
-    div[data-testid="stNumberInput"] input {
+    /* מסגרת סגולה קבועה לתיבות בחירה */
+    div[data-baseweb="select"] > div {
         border: 2px solid #8E24AA !important;
         border-radius: 8px !important;
         background-color: #FFFFFF !important;
-        text-align: right !important;
     }
-    
-    /* תיחום סגול גם למעטפת של שדות המספרים (+ ו- -) */
+
+    /* מסגרת סגולה אחת בלבד למעטפת של שדות המספרים */
     div[data-testid="stNumberInput"] > div {
         border: 2px solid #8E24AA !important;
         border-radius: 8px !important;
         background-color: #FFFFFF !important;
+    }
+    
+    /* ביטול המסגרת הפנימית של שדה המספר */
+    div[data-testid="stNumberInput"] input {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        text-align: right !important;
     }
 
     /* יישור הלוגו לימין */
@@ -47,7 +53,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# הצגת לוגו (אם קיים logo.png במאגר)
+# הצגת לוגו (אם קיים קובץ logo.png במאגר)
 if os.path.exists("logo.png"):
     st.image("logo.png", width=180)
 
