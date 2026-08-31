@@ -4,7 +4,7 @@ import os
 # הגדרת עמוד RTL
 st.set_page_config(page_title="מחשבון אירועים - EM Group", page_icon="🎵", layout="centered")
 
-# עיצוב CSS ממוקד: יישור לימין (RTL) ומסגרת סגולה יחידה למעטפת בלבד
+# עיצוב CSS ממוקד: יישור לימין (RTL) כולל תיבות info ומסגרות סגולות
 st.markdown("""
     <style>
     /* כיוון טקסט ויישור לימין לכל האלמנטים */
@@ -17,8 +17,11 @@ st.markdown("""
     div[data-testid="stMarkdownContainer"] h1, 
     div[data-testid="stMarkdownContainer"] h2, 
     div[data-testid="stMarkdownContainer"] h3,
+    div[data-testid="stMarkdownContainer"] li,
+    div[data-testid="stMarkdownContainer"] ul,
     div[data-testid="stCaptionContainer"] caption,
     div[data-testid="stWidgetLabel"] label,
+    div[data-testid="stNotification"] *,
     .stRadio label, .stCheckbox label {
         text-align: right !important;
         direction: rtl !important;
@@ -85,12 +88,12 @@ st.info("""
 **חבילת בסיס: 2,800 ₪ + מע"מ**
 
 חבילת הבסיס כוללת:
-* 🔊 מערכת הגברה מותאמת לקהל של עד 500 איש
-* 🎛️ מיקסר סאונד מקצועי
-* 🔈 מוניטור במה
-* 🎤 2 מיקרופונים אלחוטיים
-* 👨‍🔧 איש צוות טכני אחד
-* ⏱️ אירוע של עד 3 שעות בשטח
+- 🔊 מערכת הגברה מותאמת לקהל של עד 500 איש
+- 🎛️ מיקסר סאונד מקצועי
+- 🔈 מוניטור במה
+- 🎤 2 מיקרופונים אלחוטיים
+- 👨‍🔧 איש צוות טכני אחד
+- ⏱️ אירוע של עד 3 שעות בשטח
 """)
 base_price = 2800
 
