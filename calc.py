@@ -4,9 +4,14 @@ import os
 # הגדרת עמוד RTL ועיצוב מותאם למובייל ולמחשב
 st.set_page_config(page_title="מחשבון אירועים - EM Group", page_icon="🎵", layout="centered")
 
-# עיצוב CSS מקיף: יישור ימין מלא (RTL) + מסגרות סגולות בולטות וקבועות
+# עיצוב CSS מקיף: רקע אפור עדין + יישור ימין מלא (RTL) + מסגרות סגולות
 st.markdown("""
     <style>
+    /* רקע אפור עדין לכל האפליקציה */
+    .stApp {
+        background-color: #F4F5F7 !important;
+    }
+    
     /* יישור ימין כללי */
     div[data-testid="stAppViewContainer"] { text-align: right; direction: rtl; }
     div[data-baseweb="select"] { direction: rtl; }
@@ -21,7 +26,7 @@ st.markdown("""
     div[data-testid="stNumberInput"] > div > div {
         border: 2px solid #8E24AA !important;
         border-radius: 8px !important;
-        background-color: #FAFAFA !important;
+        background-color: #FFFFFF !important;
     }
 
     /* שינוי צבע המסגרת בלחיצה/פוקוס (סגול כהה עם הילה) */
@@ -60,16 +65,16 @@ if "עד שעה (+500" in travel_option:
 elif "עד שעה וחצי (+1,000" in travel_option:
     travel_cost = 1000
 
-# 2. חבילת בסיס ושעות
-st.header("2. חבילת בסיס ושעות")
+# 2. חבילת בסיס
+st.header("2. חבילת בסיס")
 st.info("חבילת בסיס: 2,800 ₪ (PA, מיקסר, מוניטור, 2 אלחוטיים, איש צוות אחד, עד 3 שעות בשטח)")
 base_price = 2800
 
-extra_hours = st.number_input("שעות חזרה גנרלית / המתנה נוספות (350 ₪/שעה):", min_value=0, max_value=12, value=0)
-extra_hours_price = extra_hours * 350
-
 # 3. צוות, ציוד ותוספות
 st.header("3. צוות, ציוד ותוספות")
+
+extra_hours = st.number_input("שעות חזרה גנרלית / המתנה נוספות (350 ₪/שעה):", min_value=0, max_value=12, value=0)
+extra_hours_price = extra_hours * 350
 
 extra_staff = st.number_input("תוספת אנשי צוות (איש צוות 1 כלול בבסיס, 400 ₪ לכל איש צוות נוסף):", min_value=0, max_value=10, value=0)
 staff_price = extra_staff * 400
