@@ -1,10 +1,10 @@
 import streamlit as st
 import os
 
-# הגדרת עמוד RTL ועיצוב מותאם
+# הגדרת עמוד RTL ועיצוב מותאם למובייל ולמחשב
 st.set_page_config(page_title="מחשבון אירועים - EM Group", page_icon="🎵", layout="centered")
 
-# עיצוב CSS מקיף ליישור מלא לימין (RTL) כולל תוצאות וטקסטים
+# עיצוב CSS מקיף: יישור ימין מלא (RTL) + מסגרות סגולות בולטות וקבועות
 st.markdown("""
     <style>
     /* יישור ימין כללי */
@@ -13,23 +13,33 @@ st.markdown("""
     .stCheckbox { text-align: right; }
     .stRadio { text-align: right; }
     .stNumberInput { direction: rtl; text-align: right; }
-    
-    /* יישור תוצאות ותיבות הודעה */
     div[data-testid="stNotification"] { text-align: right; direction: rtl; }
     div[data-testid="stMarkdownContainer"] { text-align: right; direction: rtl; }
-    
-    /* יישור לוגו לימין */
-    .logo-img { display: block; margin-left: auto; margin-right: 0; }
+
+    /* מסגרת סגולה בולטת וקבועה לתיבות הבחירה ושדות המספרים */
+    div[data-baseweb="select"] > div,
+    div[data-testid="stNumberInput"] > div > div {
+        border: 2px solid #8E24AA !important;
+        border-radius: 8px !important;
+        background-color: #FAFAFA !important;
+    }
+
+    /* שינוי צבע המסגרת בלחיצה/פוקוס (סגול כהה עם הילה) */
+    div[data-baseweb="select"] > div:focus-within,
+    div[data-testid="stNumberInput"] > div > div:focus-within {
+        border-color: #4A148C !important;
+        box-shadow: 0 0 6px rgba(142, 36, 170, 0.4) !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
-# הצגת לוגו מיושר לימין (אם קיים logo.png)
+# הצגת לוגו (אם קיים קובץ logo.png במאגר)
 if os.path.exists("logo.png"):
     col1, col2 = st.columns([1, 2])
     with col2:
         st.image("logo.png", width=200)
 
-# כותרות
+# כותרות פתיחה
 st.title("🎧 מחשבון תמחור אירועים – EM Group")
 st.caption("מערכת תמחור פנימית עבור מנהלת המשרד: מירב מימוני")
 st.markdown("---")
@@ -93,7 +103,7 @@ final_before_vat = subtotal - discount
 vat = final_before_vat * 0.18
 final_with_vat = final_before_vat + vat
 
-# סיכום והצגה מיושרים לימין
+# סיכום הצעת מחיר
 st.markdown("---")
 st.subheader("📋 סיכום הצעת מחיר")
 st.write(f"• **חבילת בסיס:** {base_price:,} ₪")
