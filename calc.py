@@ -62,14 +62,18 @@ elif "עד שעה וחצי (+1,000" in travel_option:
 
 # 2. חבילת בסיס ושעות
 st.header("2. חבילת בסיס ושעות")
-st.info("חבילת בסיס: 3,200 ₪ (PA, מיקסר, מוניטור, 2 אלחוטיים, צוות 2 אנשים, עד 3 שעות בשטח)")
-base_price = 3200
+st.info("חבילת בסיס: 2,800 ₪ (PA, מיקסר, מוניטור, 2 אלחוטיים, איש צוות אחד, עד 3 שעות בשטח)")
+base_price = 2800
 
 extra_hours = st.number_input("שעות חזרה גנרלית / המתנה נוספות (350 ₪/שעה):", min_value=0, max_value=12, value=0)
 extra_hours_price = extra_hours * 350
 
-# 3. ציוד ותוספות
-st.header("3. ציוד ותוספות")
+# 3. צוות, ציוד ותוספות
+st.header("3. צוות, ציוד ותוספות")
+
+extra_staff = st.number_input("תוספת אנשי צוות (איש צוות 1 כלול בבסיס, 400 ₪ לכל איש צוות נוסף):", min_value=0, max_value=10, value=0)
+staff_price = extra_staff * 400
+
 total_mics = st.number_input("סה\"כ מיקרופונים אלחוטיים (2 כלולים בבסיס, 150 ₪ לכל נוסף):", min_value=2, max_value=20, value=2)
 extra_mics = max(0, total_mics - 2)
 mics_price = extra_mics * 150
@@ -97,7 +101,8 @@ has_early_out = st.checkbox("הקמה מוקדמת / שהייה ארוכה - א�
 early_price = (400 if has_early_local else 0) + (600 if has_early_out else 0)
 
 # חישוב סכומים
-subtotal = base_price + travel_cost + extra_hours_price + mics_price + monitors_price + dj_price + video_price + lighting_price + band_price + early_price
+subtotal = (base_price + travel_cost + extra_hours_price + staff_price + mics_price + 
+            monitors_price + dj_price + video_price + lighting_price + band_price + early_price)
 discount = subtotal * 0.10 if is_school else 0
 final_before_vat = subtotal - discount
 vat = final_before_vat * 0.18
@@ -109,6 +114,7 @@ st.subheader("📋 סיכום הצעת מחיר")
 st.write(f"• **חבילת בסיס:** {base_price:,} ₪")
 if travel_cost > 0: st.write(f"• **נסיעות:** {travel_cost:,} ₪")
 if extra_hours > 0: st.write(f"• **חזרה/המתנה ({extra_hours} שעות):** {extra_hours_price:,} ₪")
+if extra_staff > 0: st.write(f"• **אנשי צוות נוספים ({extra_staff}):** {staff_price:,} ₪")
 if extra_mics > 0: st.write(f"• **מיקרופונים נוספים ({extra_mics}):** {mics_price:,} ₪")
 if extra_monitors > 0: st.write(f"• **מוניטורים נוספים ({extra_monitors}):** {monitors_price:,} ₪")
 if dj_price > 0: st.write(f"• **שירותי DJ:** {dj_price:,} ₪")
