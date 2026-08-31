@@ -4,12 +4,46 @@ import os
 # הגדרת עמוד RTL
 st.set_page_config(page_title="מחשבון אירועים - EM Group", page_icon="🎵", layout="centered")
 
-# עיצוב CSS בסיסי ביותר (יישור ימין בלבד, ללא שינויי צבע/מסגרות שעלולים לתקוע)
+# עיצוב CSS ממוקד: יישור לימין (RTL) ומסגרות סגולות קבועות
 st.markdown("""
     <style>
-    div[data-testid="stAppViewContainer"] { text-align: right; direction: rtl; }
-    div[data-baseweb="select"] { direction: rtl; }
-    .stCheckbox { text-align: right; }
+    /* כיוון טקסט ויישור לימין לכל האלמנטים */
+    .stApp {
+        direction: rtl;
+        text-align: right;
+    }
+    
+    div[data-testid="stMarkdownContainer"] p, 
+    div[data-testid="stMarkdownContainer"] h1, 
+    div[data-testid="stMarkdownContainer"] h2, 
+    div[data-testid="stMarkdownContainer"] h3,
+    div[data-testid="stWidgetLabel"] label,
+    .stRadio label, .stCheckbox label {
+        text-align: right !important;
+        direction: rtl !important;
+    }
+
+    /* מסגרת סגולה קבועה לכל תיבות הבחירה ושדות המספרים */
+    div[data-baseweb="select"] > div,
+    div[data-testid="stNumberInput"] input {
+        border: 2px solid #8E24AA !important;
+        border-radius: 8px !important;
+        background-color: #FFFFFF !important;
+        text-align: right !important;
+    }
+    
+    /* תיחום סגול גם למעטפת של שדות המספרים (+ ו- -) */
+    div[data-testid="stNumberInput"] > div {
+        border: 2px solid #8E24AA !important;
+        border-radius: 8px !important;
+        background-color: #FFFFFF !important;
+    }
+
+    /* יישור הלוגו לימין */
+    [data-testid="stImage"] {
+        display: flex;
+        justify-content: flex-start;
+    }
     </style>
 """, unsafe_allow_html=True)
 
