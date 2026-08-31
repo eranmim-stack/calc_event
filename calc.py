@@ -1,21 +1,33 @@
 import streamlit as st
 import os
 
-# הגדרת עמוד RTL ועיצוב למובייל
+# הגדרת עמוד RTL ועיצוב מותאם
 st.set_page_config(page_title="מחשבון אירועים - EM Group", page_icon="🎵", layout="centered")
 
-# עיצוב CSS ליישור לימין (RTL)
+# עיצוב CSS מקיף ליישור מלא לימין (RTL) כולל תוצאות וטקסטים
 st.markdown("""
     <style>
+    /* יישור ימין כללי */
     div[data-testid="stAppViewContainer"] { text-align: right; direction: rtl; }
     div[data-baseweb="select"] { direction: rtl; }
     .stCheckbox { text-align: right; }
+    .stRadio { text-align: right; }
+    .stNumberInput { direction: rtl; text-align: right; }
+    
+    /* יישור תוצאות ותיבות הודעה */
+    div[data-testid="stNotification"] { text-align: right; direction: rtl; }
+    div[data-testid="stMarkdownContainer"] { text-align: right; direction: rtl; }
+    
+    /* יישור לוגו לימין */
+    .logo-img { display: block; margin-left: auto; margin-right: 0; }
     </style>
 """, unsafe_allow_html=True)
 
-# הצגת לוגו אם קיים
+# הצגת לוגו מיושר לימין (אם קיים logo.png)
 if os.path.exists("logo.png"):
-    st.image("logo.png", width=180)
+    col1, col2 = st.columns([1, 2])
+    with col2:
+        st.image("logo.png", width=200)
 
 # כותרות
 st.title("🎧 מחשבון תמחור אירועים – EM Group")
@@ -81,7 +93,7 @@ final_before_vat = subtotal - discount
 vat = final_before_vat * 0.18
 final_with_vat = final_before_vat + vat
 
-# סיכום והצגה
+# סיכום והצגה מיושרים לימין
 st.markdown("---")
 st.subheader("📋 סיכום הצעת מחיר")
 st.write(f"• **חבילת בסיס:** {base_price:,} ₪")
