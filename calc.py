@@ -123,7 +123,8 @@ dj_price = 1000 if has_dj else 0
 
 has_projector = st.checkbox("מקרן + מסך (500 ₪)")
 has_led = st.checkbox("2 מסכי LED 65 אינץ' על סטנדים (1,000 ₪)")
-video_price = (500 if has_projector else 0) + (1000 if has_led else 0)
+has_smoke = st.checkbox("מכונת עשן / ערפל (500 ₪)")
+video_price = (500 if has_projector else 0) + (1000 if has_led else 0) + (500 if has_smoke else 0)
 
 has_light_truss = st.checkbox("גשר תאורה (1,400 ₪)")
 has_light_follow = st.checkbox("פולו ספוט + מפעיל ייעודי (650 ₪)")
@@ -156,7 +157,9 @@ if extra_mics > 0: st.write(f"• **מיקרופונים נוספים ({extra_mi
 if extra_monitors > 0: st.write(f"• **מוניטורים נוספים ({extra_monitors}):** {monitors_price:,} ₪")
 if additional_wash > 0: st.write(f"• **פנסי שטיפה נוספים ({additional_wash}):** {wash_lights_price:,} ₪")
 if dj_price > 0: st.write(f"• **שירותי DJ:** {dj_price:,} ₪")
-if video_price > 0: st.write(f"• **וידאו/מסכים:** {video_price:,} ₪")
+if has_projector: st.write(f"• **מקרן + מסך:** 500 ₪")
+if has_led: st.write(f"• **2 מסכי LED:** 1,000 ₪")
+if has_smoke: st.write(f"• **מכונת עשן / ערפל:** 500 ₪")
 if has_light_truss: st.write(f"• **גשר תאורה:** 1,400 ₪")
 if has_light_follow: st.write(f"• **פולו ספוט:** 650 ₪")
 if band_price > 0: st.write(f"• **חיבור להקה:** {band_price:,} ₪")
