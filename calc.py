@@ -4,7 +4,7 @@ import os
 # הגדרת עמוד RTL ועיצוב מותאם למובייל ולמחשב
 st.set_page_config(page_title="מחשבון אירועים - EM Group", page_icon="🎵", layout="centered")
 
-# עיצוב CSS מקיף: רקע אפור עדין + יישור ימין מלא (RTL) + מסגרות סגולות
+# עיצוב CSS מקיף: רקע אפור עדין + יישור ימין מלא (RTL) + מסגרות סגולות לכל שדות הקלט והבחירה
 st.markdown("""
     <style>
     /* רקע אפור עדין לכל האפליקציה */
@@ -21,8 +21,9 @@ st.markdown("""
     div[data-testid="stNotification"] { text-align: right; direction: rtl; }
     div[data-testid="stMarkdownContainer"] { text-align: right; direction: rtl; }
 
-    /* מסגרת סגולה בולטת וקבועה לתיבות הבחירה ושדות המספרים */
+    /* מסגרת סגולה בולטת וקבועה לכל סוגי תיבות הבחירה ושדות המספרים */
     div[data-baseweb="select"] > div,
+    div[data-testid="stSelectbox"] > div > div,
     div[data-testid="stNumberInput"] > div > div {
         border: 2px solid #8E24AA !important;
         border-radius: 8px !important;
@@ -31,6 +32,7 @@ st.markdown("""
 
     /* שינוי צבע המסגרת בלחיצה/פוקוס (סגול כהה עם הילה) */
     div[data-baseweb="select"] > div:focus-within,
+    div[data-testid="stSelectbox"] > div > div:focus-within,
     div[data-testid="stNumberInput"] > div > div:focus-within {
         border-color: #4A148C !important;
         box-shadow: 0 0 6px rgba(142, 36, 170, 0.4) !important;
@@ -67,7 +69,7 @@ elif "עד שעה וחצי (+1,000" in travel_option:
 
 # 2. חבילת בסיס
 st.header("2. חבילת בסיס")
-st.info("חבילת בסיס (2,800 ₪ בתוספת מע"מ): מערכת הגברה מותאמת עד 500 איש, מיקסר, מוניטור במה, 2 מיקרופונים אלחוטיים, איש צוות אחד, אירוע של עד 3 שעות בשטח.")
+st.info("חבילת בסיס: 2,800 ₪ + מע\"מ (מערכת הגברה מותאמת עד 500 איש, מיקסר, מוניטור במה, 2 מיקרופונים אלחוטיים, איש צוות אחד, אירוע של עד 3 שעות בשטח).")
 base_price = 2800
 
 # 3. צוות, ציוד ותוספות
@@ -116,7 +118,7 @@ final_with_vat = final_before_vat + vat
 # סיכום הצעת מחיר
 st.markdown("---")
 st.subheader("📋 סיכום הצעת מחיר")
-st.write(f"• **חבילת בסיס (מערכת הגברה עד 500 איש, מיקסר, מוניטור, 2 אלחוטיים, איש צוות, עד 3 שעות):** {base_price:,} ₪")
+st.write(f"• **חבילת בסיס (הגברה עד 500 איש, מיקסר, מוניטור, 2 אלחוטיים, איש צוות, עד 3 שעות):** {base_price:,} ₪ + מע\"מ")
 if travel_cost > 0: st.write(f"• **נסיעות:** {travel_cost:,} ₪")
 if extra_hours > 0: st.write(f"• **חזרה/המתנה ({extra_hours} שעות):** {extra_hours_price:,} ₪")
 if extra_staff > 0: st.write(f"• **אנשי צוות נוספים ({extra_staff}):** {staff_price:,} ₪")
