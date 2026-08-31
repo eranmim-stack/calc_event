@@ -17,6 +17,7 @@ st.markdown("""
     div[data-testid="stMarkdownContainer"] h1, 
     div[data-testid="stMarkdownContainer"] h2, 
     div[data-testid="stMarkdownContainer"] h3,
+    div[data-testid="stCaptionContainer"] caption,
     div[data-testid="stWidgetLabel"] label,
     .stRadio label, .stCheckbox label {
         text-align: right !important;
@@ -80,7 +81,17 @@ elif "עד שעה וחצי (+1,000" in travel_option:
 
 # 2. חבילת בסיס
 st.header("2. חבילת בסיס")
-st.info("חבילת בסיס: 2,800 ₪ + מע\"מ (מערכת הגברה מותאמת עד 500 איש, מיקסר, מוניטור במה, 2 מיקרופונים אלחוטיים, איש צוות אחד, אירוע של עד 3 שעות בשטח).")
+st.info("""
+**חבילת בסיס: 2,800 ₪ + מע"מ**
+
+חבילת הבסיס כוללת:
+* 🔊 מערכת הגברה מותאמת לקהל של עד 500 איש
+* 🎛️ מיקסר סאונד מקצועי
+* 🔈 מוניטור במה
+* 🎤 2 מיקרופונים אלחוטיים
+* 👨‍🔧 איש צוות טכני אחד
+* ⏱️ אירוע של עד 3 שעות בשטח
+""")
 base_price = 2800
 
 # 3. צוות, ציוד ותוספות
