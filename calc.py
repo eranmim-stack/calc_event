@@ -1,50 +1,21 @@
 import streamlit as st
 import os
 
-# הגדרת עמוד RTL ועיצוב מותאם למובייל ולמחשב
+# הגדרת עמוד RTL
 st.set_page_config(page_title="מחשבון אירועים - EM Group", page_icon="🎵", layout="centered")
 
-# עיצוב CSS מקיף: רקע אפור עדין + יישור ימין מלא (RTL) + מסגרות סגולות לכל שדות הקלט והבחירה
+# עיצוב CSS בסיסי ביותר (יישור ימין בלבד, ללא שינויי צבע/מסגרות שעלולים לתקוע)
 st.markdown("""
     <style>
-    /* רקע אפור עדין לכל האפליקציה */
-    .stApp {
-        background-color: #F4F5F7 !important;
-    }
-    
-    /* יישור ימין כללי */
     div[data-testid="stAppViewContainer"] { text-align: right; direction: rtl; }
     div[data-baseweb="select"] { direction: rtl; }
     .stCheckbox { text-align: right; }
-    .stRadio { text-align: right; }
-    .stNumberInput { direction: rtl; text-align: right; }
-    div[data-testid="stNotification"] { text-align: right; direction: rtl; }
-    div[data-testid="stMarkdownContainer"] { text-align: right; direction: rtl; }
-
-    /* מסגרת סגולה בולטת וקבועה לכל סוגי תיבות הבחירה ושדות המספרים */
-    div[data-baseweb="select"] > div,
-    div[data-testid="stSelectbox"] > div > div,
-    div[data-testid="stNumberInput"] > div > div {
-        border: 2px solid #8E24AA !important;
-        border-radius: 8px !important;
-        background-color: #FFFFFF !important;
-    }
-
-    /* שינוי צבע המסגרת בלחיצה/פוקוס (סגול כהה עם הילה) */
-    div[data-baseweb="select"] > div:focus-within,
-    div[data-testid="stSelectbox"] > div > div:focus-within,
-    div[data-testid="stNumberInput"] > div > div:focus-within {
-        border-color: #4A148C !important;
-        box-shadow: 0 0 6px rgba(142, 36, 170, 0.4) !important;
-    }
     </style>
 """, unsafe_allow_html=True)
 
-# הצגת לוגו (אם קיים קובץ logo.png במאגר)
+# הצגת לוגו (אם קיים logo.png במאגר)
 if os.path.exists("logo.png"):
-    col1, col2 = st.columns([1, 2])
-    with col2:
-        st.image("logo.png", width=200)
+    st.image("logo.png", width=180)
 
 # כותרות פתיחה
 st.title("🎧 מחשבון תמחור אירועים – EM Group")
