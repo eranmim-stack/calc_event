@@ -92,6 +92,7 @@ st.info("""
 - 🎛️ מיקסר סאונד מקצועי
 - 🔈 מוניטור במה
 - 🎤 2 מיקרופונים אלחוטיים
+- 💡 4 פנסי שטיפה לבמה
 - 👨‍🔧 איש צוות טכני אחד
 - ⏱️ אירוע של עד 3 שעות בשטח
 """)
@@ -113,6 +114,10 @@ mics_price = extra_mics * 150
 extra_monitors = st.number_input("תוספת מוניטורים לבמה (1 כלול בבסיס, 150 ₪ לכל נוסף):", min_value=0, max_value=10, value=0)
 monitors_price = extra_monitors * 150
 
+extra_wash_lights = st.number_input("תוספת פנסי שטיפה (4 כלולים בבסיס, 125 ₪ לכל פנס נוסף):", min_value=4, max_value=30, value=4)
+additional_wash = max(0, extra_wash_lights - 4)
+wash_lights_price = additional_wash * 125
+
 has_dj = st.checkbox("תוספת שירותי DJ / מוסיקה למופע (1,000 ₪)")
 dj_price = 1000 if has_dj else 0
 
@@ -120,10 +125,10 @@ has_projector = st.checkbox("מקרן + מסך (500 ₪)")
 has_led = st.checkbox("2 מסכי LED 65 אינץ' על סטנדים (1,000 ₪)")
 video_price = (500 if has_projector else 0) + (1000 if has_led else 0)
 
-has_light_basic = st.checkbox("תאורת במה בסיסית - 8 פנסים (600 ₪)")
 has_light_truss = st.checkbox("גשר תאורה (1,400 ₪)")
 has_light_follow = st.checkbox("פולו ספוט + מפעיל ייעודי (650 ₪)")
-lighting_price = (600 if has_light_basic else 0) + (1400 if has_light_truss else 0) + (650 if has_light_follow else 0)
+other_lighting_price = (1400 if has_light_truss else 0) + (650 if has_light_follow else 0)
+total_lighting_price = wash_lights_price + other_lighting_price
 
 has_band = st.checkbox("חיבור להקה / נגנים (1,200 ₪)")
 band_price = 1200 if has_band else 0
@@ -134,7 +139,7 @@ early_price = (400 if has_early_local else 0) + (600 if has_early_out else 0)
 
 # חישוב סכומים
 subtotal = (base_price + travel_cost + extra_hours_price + staff_price + mics_price + 
-            monitors_price + dj_price + video_price + lighting_price + band_price + early_price)
+            monitors_price + total_lighting_price + dj_price + video_price + band_price + early_price)
 discount = subtotal * 0.10 if is_school else 0
 final_before_vat = subtotal - discount
 vat = final_before_vat * 0.18
@@ -143,15 +148,17 @@ final_with_vat = final_before_vat + vat
 # סיכום הצעת מחיר
 st.markdown("---")
 st.subheader("📋 סיכום הצעת מחיר")
-st.write(f"• **חבילת בסיס (הגברה עד 500 איש, מיקסר, מוניטור, 2 אלחוטיים, איש צוות, עד 3 שעות):** {base_price:,} ₪ + מע\"מ")
+st.write(f"• **חבילת בסיס (הגברה עד 500 איש, מיקסר, מוניטור, 2 אלחוטיים, 4 פנסים, איש צוות, עד 3 שעות):** {base_price:,} ₪ + מע\"מ")
 if travel_cost > 0: st.write(f"• **נסיעות:** {travel_cost:,} ₪")
 if extra_hours > 0: st.write(f"• **חזרה/המתנה ({extra_hours} שעות):** {extra_hours_price:,} ₪")
 if extra_staff > 0: st.write(f"• **אנשי צוות נוספים ({extra_staff}):** {staff_price:,} ₪")
 if extra_mics > 0: st.write(f"• **מיקרופונים נוספים ({extra_mics}):** {mics_price:,} ₪")
 if extra_monitors > 0: st.write(f"• **מוניטורים נוספים ({extra_monitors}):** {monitors_price:,} ₪")
+if additional_wash > 0: st.write(f"• **פנסי שטיפה נוספים ({additional_wash}):** {wash_lights_price:,} ₪")
 if dj_price > 0: st.write(f"• **שירותי DJ:** {dj_price:,} ₪")
 if video_price > 0: st.write(f"• **וידאו/מסכים:** {video_price:,} ₪")
-if lighting_price > 0: st.write(f"• **תאורה:** {lighting_price:,} ₪")
+if has_light_truss: st.write(f"• **גשר תאורה:** 1,400 ₪")
+if has_light_follow: st.write(f"• **פולו ספוט:** 650 ₪")
 if band_price > 0: st.write(f"• **חיבור להקה:** {band_price:,} ₪")
 if early_price > 0: st.write(f"• **הקמה מוקדמת/פיצול:** {early_price:,} ₪")
 
