@@ -67,7 +67,7 @@ elif "עד שעה וחצי (+1,000" in travel_option:
 
 # 2. חבילת בסיס
 st.header("2. חבילת בסיס")
-st.info("חבילת בסיס: 2,800 ₪ (PA, מיקסר, מוניטור, 2 אלחוטיים, איש צוות אחד, עד 3 שעות בשטח)")
+st.info("חבילת בסיס (2,800 ₪): מערכת הגברה מותאמת עד 500 איש, מיקסר, מוניטור במה, 2 מיקרופונים אלחוטיים, איש צוות אחד, אירוע של עד 3 שעות בשטח.")
 base_price = 2800
 
 # 3. צוות, ציוד ותוספות
@@ -116,7 +116,7 @@ final_with_vat = final_before_vat + vat
 # סיכום הצעת מחיר
 st.markdown("---")
 st.subheader("📋 סיכום הצעת מחיר")
-st.write(f"• **חבילת בסיס:** {base_price:,} ₪")
+st.write(f"• **חבילת בסיס (מערכת הגברה עד 500 איש, מיקסר, מוניטור, 2 אלחוטיים, איש צוות, עד 3 שעות):** {base_price:,} ₪")
 if travel_cost > 0: st.write(f"• **נסיעות:** {travel_cost:,} ₪")
 if extra_hours > 0: st.write(f"• **חזרה/המתנה ({extra_hours} שעות):** {extra_hours_price:,} ₪")
 if extra_staff > 0: st.write(f"• **אנשי צוות נוספים ({extra_staff}):** {staff_price:,} ₪")
